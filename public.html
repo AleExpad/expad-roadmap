@@ -363,7 +363,8 @@ function saveProjects() {
   showToast('✓ Salvo automaticamente');
 }
 
-let PROJECTS = [];
+// Inicializa com DEFAULT_PROJECTS imediatamente (garante que sempre renderiza algo)
+let PROJECTS = DEFAULT_PROJECTS.filter(p => p.public !== false);
 
 // ── RENDER ALL ────────────────────────────────────────────────────
 function renderAll() {
@@ -636,18 +637,17 @@ const fmt = now.toLocaleDateString('pt-BR', { day:'2-digit', month:'short', year
 document.getElementById('today-date').textContent = fmt;
 document.getElementById('footer-date').textContent = fmt;
 
-// Tenta carregar projects.json (gerado pelo dashboard interno)
-// Fallback: usa DEFAULT_PROJECTS
+// Renderiza imediatamente com DEFAULT_PROJECTS
+renderAll();
+
+// Tenta atualizar com projects.json se disponível (gerado pelo botão Exportar público)
 fetch('projects.json?v=' + Date.now())
   .then(r => { if (!r.ok) throw new Error('no file'); return r.json(); })
   .then(data => {
     PROJECTS = data.filter(p => p.public !== false);
     renderAll();
   })
-  .catch(() => {
-    PROJECTS = DEFAULT_PROJECTS.filter(p => p.public !== false);
-    renderAll();
-  });
+  .catch(() => { /* mantém DEFAULT_PROJECTS já carregados */ });
 </script>
 </body>
 </html>
