@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expad — Product Roadmap 2026</title>
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #161a23;
+    --surface2: #1e2330;
+    --border: #2a3147;
+    --accent: #4f6ef7;
+    --accent2: #7c3aed;
+    --green: #10b981;
+    --yellow: #f59e0b;
+    --red: #ef4444;
+    --blue: #3b82f6;
+    --purple: #8b5cf6;
+    --cyan: #06b6d4;
+    --text: #e2e8f0;
+    --text2: #94a3b8;
+    --text3: #64748b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 24px; }
+
+  .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; color: white; }
+  .logo h1 { font-size: 20px; font-weight: 700; }
+  .logo span { font-size: 13px; color: var(--text2); display: block; }
+  .header-right { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .badge { padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+  .badge-mrr { background: #0f2a1a; color: var(--green); border: 1px solid #1a4a2e; }
+  .badge-date { background: #1a1f30; color: var(--text2); border: 1px solid var(--border); }
+
+  /* EDIT MODE BANNER */
+  .edit-banner { display: none; background: linear-gradient(90deg, #1a2a10, #0f2a1a); border: 1px solid #2a5a20; border-radius: 10px; padding: 10px 16px; margin-bottom: 20px; font-size: 13px; color: #34d399; display: flex; align-items: center; gap: 8px; }
+  .edit-banner.hidden { display: none; }
+  .edit-banner span { flex: 1; }
+
+  .btn { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; }
+  .btn-primary { background: var(--accent); color: white; }
+  .btn-primary:hover { background: #3b5ce4; }
+  .btn-edit { background: var(--surface2); color: var(--text2); border: 1px solid var(--border); }
+  .btn-edit:hover { border-color: var(--accent); color: var(--text); }
+  .btn-edit.active { background: #1a2a10; color: #34d399; border-color: #2a5a20; }
+  .btn-danger { background: #2a1010; color: var(--red); border: 1px solid #4a1a1a; }
+  .btn-danger:hover { background: #3a1515; }
+  .btn-sm { padding: 4px 10px; font-size: 12px; }
+  .btn-green { background: #0f2a1a; color: #34d399; border: 1px solid #1a4a2e; }
+  .btn-green:hover { background: #1a3a20; }
+
+  .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 32px; }
+  .sum-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+  .sum-card .val { font-size: 26px; font-weight: 800; margin-bottom: 4px; }
+  .sum-card .lbl { font-size: 12px; color: var(--text2); }
+
+  .tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+  .tab { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--surface); color: var(--text2); transition: all 0.2s; }
+  .tab.active { background: var(--accent); border-color: var(--accent); color: white; }
+  .tab:hover:not(.active) { border-color: var(--accent); color: var(--text); }
+
+  .view { display: none; }
+  .view.active { display: block; }
+
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+  .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; cursor: pointer; transition: border-color 0.2s, transform 0.2s; position: relative; overflow: hidden; }
+  .project-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
+  .card-icon { font-size: 28px; margin-bottom: 8px; }
+  .card-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .card-subtitle { font-size: 12px; color: var(--text2); }
+
+  .status-pill { padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+  .status-planning { background: #1a2040; color: #7c99f7; border: 1px solid #2a3a7a; }
+  .status-active { background: #0f2a1a; color: #34d399; border: 1px solid #1a4a2e; }
+  .status-backlog { background: #1e1a10; color: #fbbf24; border: 1px solid #3a2e10; }
+  .status-done { background: #0f1e2a; color: #38bdf8; border: 1px solid #1a3050; }
+
+  .progress-wrap { margin: 14px 0 10px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--text2); margin-bottom: 6px; }
+  .progress-bar { height: 5px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
+
+  .card-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .meta-tag { font-size: 11px; color: var(--text3); background: var(--surface2); padding: 3px 8px; border-radius: 6px; border: 1px solid var(--border); }
+
+  .milestones-list { margin-top: 14px; }
+  .milestone { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .milestone:last-child { border-bottom: none; }
+  .ms-dot { width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 10px; margin-top: 1px; cursor: pointer; }
+  .ms-done { background: var(--green); color: white; }
+  .ms-doing { background: var(--accent); color: white; }
+  .ms-todo { background: var(--border); color: var(--text3); }
+  .ms-text { flex: 1; }
+  .ms-q { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+  /* EDIT CONTROLS IN CARD */
+  .edit-controls { display: none; margin-top: 16px; border-top: 1px solid var(--border); padding-top: 14px; }
+  .edit-controls.visible { display: block; }
+  .edit-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .edit-label { font-size: 12px; color: var(--text2); min-width: 80px; }
+  .edit-select { background: var(--surface2); border: 1px solid var(--border); color: var(--text); border-radius: 6px; padding: 5px 8px; font-size: 12px; cursor: pointer; }
+  .edit-select:focus { outline: none; border-color: var(--accent); }
+  .progress-slider { flex: 1; accent-color: var(--accent); cursor: pointer; }
+  .progress-val { font-size: 13px; font-weight: 700; min-width: 36px; }
+
+  /* TIMELINE */
+  .timeline-wrapper { overflow-x: auto; padding-bottom: 8px; }
+  .timeline-header { display: grid; grid-template-columns: 220px repeat(6, 1fr); gap: 0; margin-bottom: 8px; }
+  .tl-head-cell { text-align: center; font-size: 12px; color: var(--text2); padding: 6px 4px; background: var(--surface); border: 1px solid var(--border); }
+  .tl-head-cell:first-child { border-radius: 8px 0 0 8px; text-align: left; padding-left: 16px; }
+  .tl-head-cell:last-child { border-radius: 0 8px 8px 0; }
+  .timeline-row { display: grid; grid-template-columns: 220px repeat(6, 1fr); gap: 0; margin-bottom: 6px; align-items: center; }
+  .tl-label { font-size: 13px; font-weight: 600; padding: 12px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px 0 0 8px; display: flex; align-items: center; gap: 8px; }
+  .tl-cell { height: 44px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); position: relative; background: var(--surface); }
+  .tl-cell:last-child { border-radius: 0 8px 8px 0; }
+  .tl-bar { position: absolute; top: 50%; transform: translateY(-50%); height: 20px; border-radius: 6px; display: flex; align-items: center; padding: 0 8px; font-size: 11px; font-weight: 600; color: white; white-space: nowrap; overflow: hidden; z-index: 1; }
+
+  /* KANBAN */
+  .kanban { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .kanban-col { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
+  .kanban-col-header { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text2); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+  .kanban-count { background: var(--surface2); border-radius: 10px; padding: 1px 7px; font-size: 11px; color: var(--text3); }
+  .kanban-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; font-size: 13px; font-weight: 500; }
+  .kanban-item .ki-icon { font-size: 16px; margin-bottom: 4px; }
+  .kanban-item .ki-q { font-size: 11px; color: var(--text3); margin-top: 4px; }
+
+  /* MODAL */
+  .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
+  .modal-backdrop.open { display: flex; }
+  .modal { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; max-width: 580px; width: 100%; max-height: 88vh; overflow-y: auto; padding: 28px; position: relative; }
+  .modal-title { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+  .modal-close { position: absolute; top: 16px; right: 16px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text2); cursor: pointer; padding: 4px 10px; font-size: 18px; line-height: 1; }
+  .section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text3); margin: 20px 0 10px; }
+
+  /* NEW PROJECT FORM */
+  .form-group { margin-bottom: 14px; }
+  .form-label { font-size: 12px; color: var(--text2); margin-bottom: 6px; display: block; }
+  .form-input { width: 100%; background: var(--surface2); border: 1px solid var(--border); color: var(--text); border-radius: 8px; padding: 8px 12px; font-size: 13px; }
+  .form-input:focus { outline: none; border-color: var(--accent); }
+  textarea.form-input { resize: vertical; min-height: 80px; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .toast { position: fixed; bottom: 24px; right: 24px; background: #0f2a1a; border: 1px solid #1a4a2e; color: #34d399; padding: 12px 20px; border-radius: 10px; font-size: 13px; font-weight: 600; z-index: 200; transform: translateY(80px); opacity: 0; transition: all 0.3s; }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  .delete-zone { display: flex; justify-content: flex-end; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
+
+  footer { margin-top: 40px; text-align: center; font-size: 12px; color: var(--text3); }
+
+  @media (max-width: 600px) {
+    .projects-grid { grid-template-columns: 1fr; }
+    .summary { grid-template-columns: repeat(2, 1fr); }
+    .form-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">
+    <img src="data:image/png;base64,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"
+         alt="Expad" style="height:36px;width:auto;">
+    <div>
+      <h1>Expad Roadmap</h1>
+      <span>Product & Engineering · 2026</span>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="badge badge-mrr">MRR R$50K → R$300K</span>
+    <span class="badge badge-date" id="today-date"></span>
+    <button class="btn btn-edit" id="edit-btn" onclick="toggleEditMode()">✏️ Editar</button>
+    <button class="btn btn-primary" onclick="openNewProjectModal()">+ Projeto</button>
+  </div>
+</div>
+
+<div class="edit-banner hidden" id="edit-banner">
+  <span>✏️ <strong>Modo de edição ativo</strong> — Clique nos cards para alterar progresso, status e marcos. Tudo salvo automaticamente.</span>
+  <button class="btn btn-sm btn-green" onclick="toggleEditMode()">✓ Concluir edição</button>
+</div>
+
+<div class="summary" id="summary-cards"></div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchView('cards', this)">📋 Projetos</div>
+  <div class="tab" onclick="switchView('timeline', this)">📅 Timeline</div>
+  <div class="tab" onclick="switchView('kanban', this)">🗂 Kanban</div>
+</div>
+
+<div id="view-cards" class="view active">
+  <div class="projects-grid" id="projects-grid"></div>
+</div>
+
+<div id="view-timeline" class="view">
+  <div class="timeline-wrapper">
+    <div style="min-width:700px;">
+      <div class="timeline-header">
+        <div class="tl-head-cell">Projeto</div>
+        <div class="tl-head-cell">Q1 2026</div>
+        <div class="tl-head-cell">Q2 2026</div>
+        <div class="tl-head-cell">Q3 2026</div>
+        <div class="tl-head-cell">Q4 2026</div>
+        <div class="tl-head-cell">Q1 2027</div>
+        <div class="tl-head-cell">Q2 2027</div>
+      </div>
+      <div id="timeline-rows"></div>
+    </div>
+  </div>
+  <p style="font-size:12px;color:var(--text3);margin-top:12px;">* Timeline estimada. Ajuste em modo de edição.</p>
+</div>
+
+<div id="view-kanban" class="view">
+  <div class="kanban" id="kanban-board"></div>
+</div>
+
+<!-- MODAL detalhe / edição -->
+<div class="modal-backdrop" id="modal-backdrop" onclick="closeModal(event)">
+  <div class="modal" id="modal-content">
+    <button class="modal-close" onclick="closeModal(null)">×</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<!-- MODAL novo projeto -->
+<div class="modal-backdrop" id="new-modal-backdrop" onclick="closeNewModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeNewModal(null)">×</button>
+    <div class="modal-title">+ Novo Projeto</div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:20px;">Preencha os campos principais. Você pode editar os detalhes depois.</p>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Ícone (emoji)</label>
+        <input class="form-input" id="np-icon" value="🚀" maxlength="4">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Status inicial</label>
+        <select class="form-input edit-select" id="np-status">
+          <option value="backlog">Backlog</option>
+          <option value="planning">Planejamento</option>
+          <option value="active">Em Progresso</option>
+          <option value="done">Concluído</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Nome do Projeto *</label>
+      <input class="form-input" id="np-title" placeholder="Ex: Integração Salesforce">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Subtítulo</label>
+      <input class="form-input" id="np-subtitle" placeholder="Ex: CRM sync · Pipeline">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Descrição</label>
+      <textarea class="form-input" id="np-desc" placeholder="O que esse projeto faz e por quê?"></textarea>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Quarter previsto</label>
+        <input class="form-input" id="np-quarter" placeholder="Q3 2026">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Esforço estimado</label>
+        <input class="form-input" id="np-effort" placeholder="2–3 meses">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Time responsável</label>
+      <input class="form-input" id="np-team" placeholder="Eng + Produto">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Prioridade</label>
+      <select class="form-input edit-select" id="np-priority">
+        <option value="🔴 Alta">🔴 Alta</option>
+        <option value="🟡 Média">🟡 Média</option>
+        <option value="🟢 Baixa">🟢 Baixa</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Marcos (um por linha)</label>
+      <textarea class="form-input" id="np-milestones" placeholder="Definir escopo&#10;Desenvolver MVP&#10;Beta com clientes&#10;Launch" style="min-height:100px;"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Cor (hex)</label>
+      <input class="form-input" id="np-color" value="#4f6ef7" type="color" style="height:40px;padding:4px;">
+    </div>
+
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px;">
+      <button class="btn btn-edit" onclick="closeNewModal(null)">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveNewProject()">✓ Criar Projeto</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>Expad · Roadmap 2026 · <span id="footer-date"></span> · Dados salvos localmente no browser.</footer>
+
+<script>
+// ── DEFAULT DATA ──────────────────────────────────────────────────
+const DEFAULT_PROJECTS = [
+  {
+    id: 'app-mobile',
+    icon: '📱', title: 'App Mobile Expad', subtitle: 'iPhone & Android',
+    status: 'planning', progress: 5, color: '#4f6ef7',
+    quarter: 'Q3 2026', tl: { start: 2, span: 3 },
+    priority: '🔴 Alta', effort: '5–6 meses', team: 'Eng + Design',
+    description: 'App nativo (iOS + Android) em Flutter para clientes acompanharem leads, conversões e performance de campanhas de qualquer lugar.',
+    impact: 'Aumenta retenção e reduz churn. Diferencial frente a concorrentes sem app.',
+    dependencies: ['Time To Value (UX flows definidos antes do app)'],
+    milestones: [
+      { text: 'Definição de escopo & wireframes', q: 'Q2–Q3 2026', status: 'todo' },
+      { text: 'App Flutter iOS (alpha interno)', q: 'Q3 2026', status: 'todo' },
+      { text: 'App Flutter Android (alpha interno)', q: 'Q3 2026', status: 'todo' },
+      { text: 'Beta fechado com 20 clientes', q: 'Q4 2026', status: 'todo' },
+      { text: 'Publicação App Store + Play Store', q: 'Q1 2027', status: 'todo' },
+    ]
+  },
+  {
+    id: 'mcp-cli',
+    icon: '🤖', title: 'MCP & CLI Agent Expad', subtitle: 'Developer & Power User Layer',
+    status: 'backlog', progress: 10, color: '#7c3aed',
+    quarter: 'Q4 2026', tl: { start: 3, span: 3 },
+    priority: '🟡 Média', effort: '3–4 meses', team: 'Eng (Go)',
+    description: 'Servidor MCP oficial + CLI Agent para agências e power users operarem a plataforma via AI (Claude, Cursor, etc.). Expõe leads, eventos offline e métricas como tools MCP.',
+    impact: 'Diferencial único no mercado. Uma agência usa AI para operar 50 contas. Canal de distribuição via ecosystem Claude/Anthropic.',
+    dependencies: ['APIs REST/gRPC estáveis'],
+    milestones: [
+      { text: 'Design das MCP tools (leads, eventos, campanhas)', q: 'Q3 2026', status: 'todo' },
+      { text: 'MCP Server Go — v1 (read-only)', q: 'Q4 2026', status: 'todo' },
+      { text: 'MCP Server — write (enviar eventos, criar leads)', q: 'Q4 2026', status: 'todo' },
+      { text: 'CLI Agent (wrapper com auth)', q: 'Q1 2027', status: 'todo' },
+      { text: 'Docs + publicação no registry MCP', q: 'Q2 2027', status: 'todo' },
+    ]
+  },
+  {
+    id: 'ttv',
+    icon: '⚡', title: 'Time To Value', subtitle: 'Onboarding & Ativação',
+    status: 'active', progress: 30, color: '#10b981',
+    quarter: 'Q2–Q3 2026', tl: { start: 1, span: 2 },
+    priority: '🔴 Alta', effort: '2–3 meses', team: 'Produto + Eng + CS',
+    description: 'Reduzir tempo entre cadastro e primeiro evento de conversão offline. Meta: cliente trackando leads em < 24h. Onboarding guiado, checklist de setup, detecção de problemas, suporte proativo.',
+    impact: 'Diretamente ligado à retenção e redução de churn nos primeiros 30 dias. Crítico para escalar para 1.000+ contas.',
+    dependencies: [],
+    milestones: [
+      { text: 'Mapeamento do funil de ativação atual', q: 'Q2 2026', status: 'doing' },
+      { text: 'Redesign do onboarding (checklist + wizards)', q: 'Q2 2026', status: 'todo' },
+      { text: 'Detecção automática de setup incompleto', q: 'Q3 2026', status: 'todo' },
+      { text: 'Email/WhatsApp triggers de ativação proativa', q: 'Q3 2026', status: 'todo' },
+      { text: 'TTV médio < 24h medido e monitorado', q: 'Q3 2026', status: 'todo' },
+    ]
+  },
+  {
+    id: 'ai-agent',
+    icon: '🧠', title: 'AI Agent — Novos Recursos', subtitle: 'Áudio · PDF · Alertas',
+    status: 'planning', progress: 15, color: '#f59e0b',
+    quarter: 'Q3–Q4 2026', tl: { start: 2, span: 3 },
+    priority: '🔴 Alta', effort: '4–5 meses', team: 'Eng (AI + WhatsApp)',
+    description: 'Expandir o AI Agent com 3 recursos: (1) Envio de áudios para leads via WhatsApp, (2) Envio de PDFs/documentos, (3) Sistema de alertas e notificações de atividades para o time.',
+    impact: 'Aumenta taxa de conversão do atendimento automatizado. Agentes mais humanos = leads mais engajados.',
+    dependencies: ['APIs WhatsApp media upload, GCS storage'],
+    milestones: [
+      { text: 'Envio de Áudio via WhatsApp (AI voz)', q: 'Q3 2026', status: 'todo' },
+      { text: 'Envio de PDF/Documentos para leads', q: 'Q3 2026', status: 'todo' },
+      { text: 'Sistema de Alertas — painel do cliente', q: 'Q3 2026', status: 'todo' },
+      { text: 'Notificações push (email + WhatsApp interno)', q: 'Q4 2026', status: 'todo' },
+      { text: 'Dashboard de atividades do AI Agent', q: 'Q4 2026', status: 'todo' },
+    ]
+  },
+  {
+    id: 'agency',
+    icon: '🏢', title: 'Canal de Agências', subtitle: 'Multi-conta · White-label · Comissões',
+    status: 'backlog', progress: 20, color: '#06b6d4',
+    quarter: 'Q3 2026', tl: { start: 2, span: 2 },
+    priority: '🔴 Alta', effort: '3–4 meses', team: 'Produto + Eng + Vendas',
+    description: 'Estrutura de produto para agências: painel multi-conta, gestão de permissões, white-label parcial, modelo de comissão/revenda.',
+    impact: 'Uma agência = 10–50 clientes. Essencial para meta R$300K MRR.',
+    dependencies: ['Time To Value (produto maduro primeiro)'],
+    milestones: [
+      { text: 'Painel multi-conta (visão agência)', q: 'Q2 2026', status: 'doing' },
+      { text: 'Permissões granulares por cliente', q: 'Q3 2026', status: 'todo' },
+      { text: 'White-label (logo + domínio customizado)', q: 'Q3 2026', status: 'todo' },
+      { text: 'Modelo de comissão / plano agência', q: 'Q4 2026', status: 'todo' },
+      { text: 'Primeiro batch de 10 agências ativas', q: 'Q4 2026', status: 'todo' },
+    ]
+  }
+];
+
+// ── STORAGE ───────────────────────────────────────────────────────
+const STORAGE_KEY = 'expad_roadmap_v2';
+
+function loadProjects() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) return JSON.parse(saved);
+  } catch(e) {}
+  return JSON.parse(JSON.stringify(DEFAULT_PROJECTS));
+}
+
+function saveProjects() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(PROJECTS));
+  renderAll();
+  showToast('✓ Salvo automaticamente');
+}
+
+let PROJECTS = loadProjects();
+let editMode = false;
+
+// ── EDIT MODE ─────────────────────────────────────────────────────
+function toggleEditMode() {
+  editMode = !editMode;
+  document.getElementById('edit-btn').classList.toggle('active', editMode);
+  document.getElementById('edit-btn').textContent = editMode ? '✓ Modo edição ON' : '✏️ Editar';
+  const banner = document.getElementById('edit-banner');
+  banner.classList.toggle('hidden', !editMode);
+  renderAll();
+}
+
+// ── RENDER ALL ────────────────────────────────────────────────────
+function renderAll() {
+  renderSummary();
+  renderCards();
+  renderTimeline();
+  renderKanban();
+}
+
+function renderSummary() {
+  const counts = { total: PROJECTS.length, planning: 0, active: 0, backlog: 0, done: 0 };
+  PROJECTS.forEach(p => counts[p.status] = (counts[p.status] || 0) + 1);
+  document.getElementById('summary-cards').innerHTML = `
+    <div class="sum-card"><div class="val" style="color:var(--accent)">${counts.total}</div><div class="lbl">Projetos no Roadmap</div></div>
+    <div class="sum-card"><div class="val" style="color:var(--yellow)">${counts.planning || 0}</div><div class="lbl">Em Planejamento</div></div>
+    <div class="sum-card"><div class="val" style="color:var(--green)">${counts.active || 0}</div><div class="lbl">Em Progresso</div></div>
+    <div class="sum-card"><div class="val" style="color:var(--text2)">${counts.backlog || 0}</div><div class="lbl">Backlog Priorizado</div></div>
+    <div class="sum-card"><div class="val" style="color:var(--cyan)">${counts.done || 0}</div><div class="lbl">Concluídos</div></div>
+  `;
+}
+
+const STATUS_LABELS = { planning: 'Planejamento', active: 'Em Progresso', backlog: 'Backlog', done: 'Concluído' };
+
+function renderCards() {
+  const grid = document.getElementById('projects-grid');
+  grid.innerHTML = PROJECTS.map((p, pi) => `
+    <div class="project-card" onclick="handleCardClick(event, '${p.id}')">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:${p.color};border-radius:14px 14px 0 0;"></div>
+      <div class="card-header">
+        <div>
+          <div class="card-icon">${p.icon}</div>
+          <div class="card-title">${p.title}</div>
+          <div class="card-subtitle">${p.subtitle}</div>
+        </div>
+        <span class="status-pill status-${p.status}">${STATUS_LABELS[p.status]}</span>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span>Progresso</span><span style="color:${p.color}">${p.progress}%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:${p.progress}%;background:${p.color};"></div>
+        </div>
+      </div>
+      <div class="milestones-list">
+        ${p.milestones.slice(0, 3).map((m, mi) => `
+          <div class="milestone">
+            <div class="ms-dot ${m.status === 'done' ? 'ms-done' : m.status === 'doing' ? 'ms-doing' : 'ms-todo'}"
+              onclick="${editMode ? `cycleMilestone(event,'${p.id}',${mi})` : ''}">
+              ${m.status === 'done' ? '✓' : m.status === 'doing' ? '▶' : '○'}
+            </div>
+            <div class="ms-text">${m.text}<div class="ms-q">${m.q}</div></div>
+          </div>
+        `).join('')}
+        ${p.milestones.length > 3 ? `<div style="font-size:12px;color:var(--text3);padding:6px 0;">+${p.milestones.length - 3} marcos →</div>` : ''}
+      </div>
+
+      <!-- EDIT CONTROLS (visible in edit mode) -->
+      <div class="edit-controls ${editMode ? 'visible' : ''}">
+        <div class="edit-row">
+          <span class="edit-label">Progresso</span>
+          <input type="range" min="0" max="100" value="${p.progress}"
+            class="progress-slider"
+            oninput="updateProgress('${p.id}', this.value)"
+            onclick="event.stopPropagation()">
+          <span class="progress-val" id="pval-${p.id}">${p.progress}%</span>
+        </div>
+        <div class="edit-row">
+          <span class="edit-label">Status</span>
+          <select class="edit-select" onclick="event.stopPropagation()" onchange="updateStatus('${p.id}', this.value)">
+            <option value="backlog" ${p.status==='backlog'?'selected':''}>Backlog</option>
+            <option value="planning" ${p.status==='planning'?'selected':''}>Planejamento</option>
+            <option value="active" ${p.status==='active'?'selected':''}>Em Progresso</option>
+            <option value="done" ${p.status==='done'?'selected':''}>Concluído</option>
+          </select>
+          <button class="btn btn-sm btn-danger" onclick="event.stopPropagation();deleteProject('${p.id}')">🗑 Excluir</button>
+        </div>
+        <div class="edit-row">
+          <span class="edit-label">📅 Início</span>
+          <select class="edit-select" onclick="event.stopPropagation()" onchange="updateTimeline('${p.id}', 'start', parseInt(this.value))">
+            ${['Q1 2026','Q2 2026','Q3 2026','Q4 2026','Q1 2027','Q2 2027'].map((q,i) => `<option value="${i}" ${(p.tl&&p.tl.start===i)||(!p.tl&&i===0)?'selected':''}>${q}</option>`).join('')}
+          </select>
+          <span class="edit-label" style="min-width:auto">duração</span>
+          <select class="edit-select" onclick="event.stopPropagation()" onchange="updateTimeline('${p.id}', 'span', parseInt(this.value))">
+            ${[1,2,3,4,5,6].map(n => `<option value="${n}" ${(p.tl&&p.tl.span===n)||(!p.tl&&n===1)?'selected':''}>${n}Q</option>`).join('')}
+          </select>
+        </div>
+        <div class="edit-row">
+          <span class="edit-label">👨‍💻 Dev</span>
+          <select class="edit-select" onclick="event.stopPropagation()" onchange="updateField('${p.id}', 'dev', this.value)">
+            <option value="" ${!p.dev?'selected':''}>— A definir</option>
+            <option value="Bruno" ${p.dev==='Bruno'?'selected':''}>Bruno</option>
+            <option value="Lucas" ${p.dev==='Lucas'?'selected':''}>Lucas</option>
+            <option value="Bruno + Lucas" ${p.dev==='Bruno + Lucas'?'selected':''}>Bruno + Lucas</option>
+          </select>
+        </div>
+        <div class="edit-row">
+          <span class="edit-label">👥 Time</span>
+          <input type="text" class="edit-select" style="flex:1;" value="${p.team}"
+            onclick="event.stopPropagation()"
+            onchange="updateField('${p.id}', 'team', this.value)">
+        </div>
+        <div class="edit-row">
+          <span class="edit-label">🚦 Prioridade</span>
+          <select class="edit-select" onclick="event.stopPropagation()" onchange="updateField('${p.id}', 'priority', this.value)">
+            <option value="🔴 Alta" ${p.priority==='🔴 Alta'?'selected':''}>🔴 Alta</option>
+            <option value="🟡 Média" ${p.priority==='🟡 Média'?'selected':''}>🟡 Média</option>
+            <option value="🟢 Baixa" ${p.priority==='🟢 Baixa'?'selected':''}>🟢 Baixa</option>
+          </select>
+        </div>
+        <div style="font-size:11px;color:var(--text3);margin-top:4px;">Clique nos ● dos marcos para ciclar: pendente → em andamento → feito</div>
+      </div>
+
+      <div class="card-meta" style="margin-top:${editMode ? '0' : '14px'};">
+        <span class="meta-tag">📅 ${p.quarter}</span>
+        <span class="meta-tag">⏱ ${p.effort}</span>
+        <span class="meta-tag">👥 ${p.team}</span>
+        <span class="meta-tag">${p.priority}</span>
+        ${p.dev ? `<span class="meta-tag">👨‍💻 ${p.dev}</span>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function handleCardClick(e, id) {
+  if (editMode) return; // em edit mode, não abre modal
+  openModal(id);
+}
+
+function updateProgress(id, val) {
+  const p = PROJECTS.find(x => x.id === id);
+  if (!p) return;
+  p.progress = parseInt(val);
+  const fill = document.querySelector(`#projects-grid .project-card [style*="width:${p.progress}"]`);
+  document.getElementById('pval-' + id).textContent = val + '%';
+  // live update da barra sem re-render completo
+  const cards = document.querySelectorAll('.project-card');
+  cards.forEach(card => {
+    if (card.innerHTML.includes(`'${id}'`)) {
+      const bar = card.querySelector('.progress-fill');
+      const lbl = card.querySelector('.progress-label span:last-child');
+      if (bar) bar.style.width = val + '%';
+      if (lbl) lbl.textContent = val + '%';
+    }
+  });
+  saveProjectsSilent();
+}
+
+function updateStatus(id, val) {
+  const p = PROJECTS.find(x => x.id === id);
+  if (!p) return;
+  p.status = val;
+  saveProjects();
+}
+
+function cycleMilestone(e, id, idx) {
+  e.stopPropagation();
+  const p = PROJECTS.find(x => x.id === id);
+  if (!p) return;
+  const cycle = { todo: 'doing', doing: 'done', done: 'todo' };
+  p.milestones[idx].status = cycle[p.milestones[idx].status];
+  // recalc progress from milestones
+  const done = p.milestones.filter(m => m.status === 'done').length;
+  p.progress = Math.round((done / p.milestones.length) * 100);
+  saveProjects();
+}
+
+function updateField(id, field, val) {
+  const p = PROJECTS.find(x => x.id === id);
+  if (!p) return;
+  p[field] = val;
+  saveProjects();
+}
+
+function updateTimeline(id, field, val) {
+  const p = PROJECTS.find(x => x.id === id);
+  if (!p) return;
+  if (!p.tl) p.tl = { start: 0, span: 1 };
+  p.tl[field] = val;
+  // clamp: start+span não pode passar de 6
+  if (p.tl.start + p.tl.span > 6) p.tl.span = 6 - p.tl.start;
+  saveProjects();
+}
+
+function deleteProject(id) {
+  if (!confirm('Excluir este projeto do roadmap?')) return;
+  PROJECTS = PROJECTS.filter(p => p.id !== id);
+  saveProjects();
+}
+
+function saveProjectsSilent() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(PROJECTS));
+}
+
+// ── TIMELINE ─────────────────────────────────────────────────────
+function renderTimeline() {
+  const container = document.getElementById('timeline-rows');
+  container.innerHTML = PROJECTS.map(p => {
+    const cells = [0,1,2,3,4,5].map(i => {
+      const isStart = i === (p.tl ? p.tl.start : 0);
+      const span = p.tl ? p.tl.span : 1;
+      return `<div class="tl-cell">
+        ${isStart ? `<div class="tl-bar" style="left:6px;width:calc(${span*100}% - 12px + ${(span-1)}px);background:${p.color};opacity:0.85;">${p.icon} ${p.title}</div>` : ''}
+      </div>`;
+    }).join('');
+    return `<div class="timeline-row">
+      <div class="tl-label" style="border-left:3px solid ${p.color}">${p.icon} ${p.title}</div>
+      ${cells}
+    </div>`;
+  }).join('');
+}
+
+// ── KANBAN ────────────────────────────────────────────────────────
+function renderKanban() {
+  const cols = [
+    { id: 'backlog', label: 'Backlog', color: '#f59e0b' },
+    { id: 'planning', label: 'Planejamento', color: '#4f6ef7' },
+    { id: 'active', label: 'Em Progresso', color: '#10b981' },
+    { id: 'done', label: 'Concluído', color: '#38bdf8' },
+  ];
+  document.getElementById('kanban-board').innerHTML = cols.map(col => {
+    const items = PROJECTS.filter(p => p.status === col.id);
+    return `<div class="kanban-col">
+      <div class="kanban-col-header" style="color:${col.color}">
+        <span style="width:8px;height:8px;border-radius:50%;background:${col.color};display:inline-block;"></span>
+        ${col.label}<span class="kanban-count">${items.length}</span>
+      </div>
+      ${items.map(p => `
+        <div class="kanban-item" onclick="openModal('${p.id}')" style="border-left:3px solid ${p.color};cursor:pointer;">
+          <div class="ki-icon">${p.icon}</div>
+          <div>${p.title}</div>
+          <div class="ki-q">${p.quarter} · ${p.effort}</div>
+          <div style="margin-top:8px;"><div style="height:3px;background:var(--border);border-radius:3px;">
+            <div style="height:100%;width:${p.progress}%;background:${p.color};border-radius:3px;"></div>
+          </div></div>
+        </div>
+      `).join('')}
+      ${items.length === 0 ? `<div style="color:var(--text3);font-size:12px;text-align:center;padding:20px 0;">Nenhum projeto</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+// ── MODAL DETALHE ────────────────────────────────────────────────
+function openModal(id) {
+  const p = PROJECTS.find(x => x.id === id);
+  if (!p) return;
+  const dep = (p.dependencies || []);
+  document.getElementById('modal-body').innerHTML = `
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+      <span style="font-size:36px">${p.icon}</span>
+      <div>
+        <div class="modal-title">${p.title}</div>
+        <div style="color:var(--text2);font-size:13px;">${p.subtitle}</div>
+      </div>
+    </div>
+    <span class="status-pill status-${p.status}">${STATUS_LABELS[p.status]}</span>
+    <div class="progress-wrap" style="margin-top:16px;">
+      <div class="progress-label"><span>Progresso Geral</span><span style="color:${p.color}">${p.progress}%</span></div>
+      <div class="progress-bar" style="height:8px;"><div class="progress-fill" style="width:${p.progress}%;background:${p.color};"></div></div>
+    </div>
+    <div class="section-label">Contexto</div>
+    <p style="font-size:13px;color:var(--text2);line-height:1.6;">${p.description || '—'}</p>
+    <div class="section-label">Impacto Esperado</div>
+    <p style="font-size:13px;color:var(--text2);line-height:1.6;">${p.impact || '—'}</p>
+    <div class="section-label">Metadados</div>
+    <div class="card-meta">
+      <span class="meta-tag">📅 ${p.quarter}</span>
+      <span class="meta-tag">⏱ ${p.effort}</span>
+      <span class="meta-tag">👥 ${p.team}</span>
+      <span class="meta-tag">${p.priority}</span>
+      ${p.dev ? `<span class="meta-tag">👨‍💻 ${p.dev}</span>` : ''}
+    </div>
+    ${dep.length ? `<div class="section-label">Dependências</div><div>${dep.map(d => `<span style="display:inline-flex;align-items:center;gap:4px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:12px;margin:3px;">🔗 ${d}</span>`).join('')}</div>` : ''}
+    <div class="section-label">Todos os Marcos</div>
+    <div class="milestones-list">
+      ${p.milestones.map(m => `
+        <div class="milestone">
+          <div class="ms-dot ${m.status === 'done' ? 'ms-done' : m.status === 'doing' ? 'ms-doing' : 'ms-todo'}">
+            ${m.status === 'done' ? '✓' : m.status === 'doing' ? '▶' : '○'}
+          </div>
+          <div class="ms-text">${m.text}<div class="ms-q">${m.q}</div></div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+
+function closeModal(e) {
+  if (e === null || e.target === document.getElementById('modal-backdrop'))
+    document.getElementById('modal-backdrop').classList.remove('open');
+}
+
+// ── NOVO PROJETO ─────────────────────────────────────────────────
+function openNewProjectModal() {
+  document.getElementById('new-modal-backdrop').classList.add('open');
+}
+function closeNewModal(e) {
+  if (e === null || e.target === document.getElementById('new-modal-backdrop'))
+    document.getElementById('new-modal-backdrop').classList.remove('open');
+}
+function saveNewProject() {
+  const title = document.getElementById('np-title').value.trim();
+  if (!title) { alert('Nome do projeto é obrigatório.'); return; }
+
+  const msLines = document.getElementById('np-milestones').value.split('\n').filter(l => l.trim());
+  const milestones = msLines.map(l => ({ text: l.trim(), q: document.getElementById('np-quarter').value || 'A definir', status: 'todo' }));
+  if (!milestones.length) milestones.push({ text: 'Definir escopo', q: 'A definir', status: 'todo' });
+
+  const newProject = {
+    id: 'proj-' + Date.now(),
+    icon: document.getElementById('np-icon').value || '🚀',
+    title,
+    subtitle: document.getElementById('np-subtitle').value || '',
+    status: document.getElementById('np-status').value,
+    progress: 0,
+    color: document.getElementById('np-color').value,
+    quarter: document.getElementById('np-quarter').value || 'A definir',
+    tl: { start: 3, span: 2 },
+    priority: document.getElementById('np-priority').value,
+    effort: document.getElementById('np-effort').value || 'A definir',
+    team: document.getElementById('np-team').value || 'A definir',
+    description: document.getElementById('np-desc').value || '',
+    impact: '',
+    dependencies: [],
+    milestones,
+  };
+
+  PROJECTS.push(newProject);
+  saveProjects();
+  closeNewModal(null);
+  showToast('✓ Projeto criado com sucesso!');
+
+  // clear form
+  ['np-title','np-subtitle','np-desc','np-quarter','np-effort','np-team','np-milestones'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('np-icon').value = '🚀';
+  document.getElementById('np-color').value = '#4f6ef7';
+}
+
+// ── TABS ─────────────────────────────────────────────────────────
+function switchView(id, el) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('view-' + id).classList.add('active');
+  el.classList.add('active');
+}
+
+// ── TOAST ────────────────────────────────────────────────────────
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ── INIT ──────────────────────────────────────────────────────────
+const now = new Date();
+const fmt = now.toLocaleDateString('pt-BR', { day:'2-digit', month:'short', year:'numeric' });
+document.getElementById('today-date').textContent = fmt;
+document.getElementById('footer-date').textContent = fmt;
+renderAll();
+</script>
+</body>
+</html>
