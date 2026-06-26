@@ -531,43 +531,10 @@ function closeModal(e) {
     document.getElementById('modal-backdrop').classList.remove('open');
 }
 
-// ── NOVO PROJETO ─────────────────────────────────────────────────
+// ── SUGGEST MODAL CLOSE ──────────────────────────────────────────
 function closeNewModal(e) {
   if (e === null || e.target === document.getElementById('new-modal-backdrop'))
     document.getElementById('new-modal-backdrop').classList.remove('open');
-}
-  const msLines = document.getElementById('np-milestones').value.split('\n').filter(l => l.trim());
-  const milestones = msLines.map(l => ({ text: l.trim(), q: document.getElementById('np-quarter').value || 'A definir', status: 'todo' }));
-  if (!milestones.length) milestones.push({ text: 'Definir escopo', q: 'A definir', status: 'todo' });
-
-  const newProject = {
-    id: 'proj-' + Date.now(),
-    icon: document.getElementById('np-icon').value || '🚀',
-    title,
-    subtitle: document.getElementById('np-subtitle').value || '',
-    status: document.getElementById('np-status').value,
-    progress: 0,
-    color: document.getElementById('np-color').value,
-    quarter: document.getElementById('np-quarter').value || 'A definir',
-    tl: { start: 3, span: 2 },
-    priority: document.getElementById('np-priority').value,
-    effort: document.getElementById('np-effort').value || 'A definir',
-    team: document.getElementById('np-team').value || 'A definir',
-    description: document.getElementById('np-desc').value || '',
-    impact: '',
-    dependencies: [],
-    milestones,
-  };
-
-  PROJECTS.push(newProject);
-  saveProjects();
-  closeNewModal(null);
-  showToast('✓ Projeto criado com sucesso!');
-
-  // clear form
-  ['np-title','np-subtitle','np-desc','np-quarter','np-effort','np-team','np-milestones'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('np-icon').value = '🚀';
-  document.getElementById('np-color').value = '#4f6ef7';
 }
 
 // ── SUGGEST MODAL ───────────────────────────────────────────────
