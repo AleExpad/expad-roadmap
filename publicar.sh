@@ -11,6 +11,7 @@ cd ~/Desktop/Expad\ 2.0/expad-roadmap-site
 # Commit e push
 git add .
 git commit -m "update: roadmap $(date '+%d/%m/%Y %H:%M')"
+git pull origin gh-pages --rebase
 git push origin gh-pages
 
 echo "✅ Publicado! Acesse: https://roadmap.expad.co"
