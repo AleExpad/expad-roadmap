@@ -423,7 +423,6 @@ function renderCards() {
       <div class="card-meta" style="margin-top:14px;">
         <span class="meta-tag">📅 ${p.quarter}</span>
         <span class="meta-tag">⏱ ${p.effort}</span>
-        <span class="meta-tag">👥 ${p.team}</span>
         <span class="meta-tag">${p.priority}</span>
       </div>
     </div>
@@ -508,7 +507,6 @@ function openModal(id) {
     <div class="card-meta">
       <span class="meta-tag">📅 ${p.quarter}</span>
       <span class="meta-tag">⏱ ${p.effort}</span>
-      <span class="meta-tag">👥 ${p.team}</span>
       <span class="meta-tag">${p.priority}</span>
     </div>
     ${dep.length ? `<div class="section-label">Dependências</div><div>${dep.map(d => `<span style="display:inline-flex;align-items:center;gap:4px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:12px;margin:3px;">🔗 ${d}</span>`).join('')}</div>` : ''}

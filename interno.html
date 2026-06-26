@@ -274,10 +274,6 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <label class="form-label">Time responsável</label>
-      <input class="form-input" id="np-team" placeholder="Eng + Produto">
-    </div>
 
     <div class="form-group">
       <label class="form-label">Prioridade</label>
@@ -533,12 +529,6 @@ function renderCards() {
           </select>
         </div>
         <div class="edit-row">
-          <span class="edit-label">👥 Time</span>
-          <input type="text" class="edit-select" style="flex:1;" value="${p.team}"
-            onclick="event.stopPropagation()"
-            onchange="updateField('${p.id}', 'team', this.value)">
-        </div>
-        <div class="edit-row">
           <span class="edit-label">🚦 Prioridade</span>
           <select class="edit-select" onclick="event.stopPropagation()" onchange="updateField('${p.id}', 'priority', this.value)">
             <option value="🔴 Alta" ${p.priority==='🔴 Alta'?'selected':''}>🔴 Alta</option>
@@ -562,7 +552,7 @@ function renderCards() {
       <div class="card-meta" style="margin-top:${editMode ? '0' : '14px'};">
         <span class="meta-tag">📅 ${p.quarter}</span>
         <span class="meta-tag">⏱ ${p.effort}</span>
-        <span class="meta-tag">👥 ${p.team}</span>
+
         <span class="meta-tag">${p.priority}</span>
         ${p.dev ? `<span class="meta-tag">👨‍💻 ${p.dev}</span>` : ''}
       </div>
