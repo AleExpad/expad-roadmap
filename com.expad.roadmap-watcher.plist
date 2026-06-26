@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.expad.roadmap-watcher</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/alessandrodornas/Desktop/Expad 2.0/expad-roadmap-site/watcher.sh</string>
+  </array>
+
+  <!-- Inicia automaticamente no login -->
+  <key>RunAtLoad</key>
+  <true/>
+
+  <!-- Reinicia se o processo morrer -->
+  <key>KeepAlive</key>
+  <true/>
+
+  <!-- Log de saída -->
+  <key>StandardOutPath</key>
+  <string>/Users/alessandrodornas/Desktop/Expad 2.0/expad-roadmap-site/watcher.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/alessandrodornas/Desktop/Expad 2.0/expad-roadmap-site/watcher.log</string>
+</dict>
+</plist>
