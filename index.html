@@ -259,21 +259,148 @@
 <script>
 // ── DEFAULT DATA ──────────────────────────────────────────────────
 const DEFAULT_PROJECTS = [
+  // ── P0 CRÍTICO ────────────────────────────────────────────────────
+  {
+    id: 'billing-stability',
+    icon: '🔧', title: 'Estabilidade & Billing', subtitle: 'Suspensão · Erros · Assinatura',
+    status: 'active', progress: 10, color: '#ef4444',
+    quarter: 'Q3 2026', tl: { start: 1, span: 2 },
+    priority: '🔴 Crítico (P0)', effort: '1–2 meses',
+    description: 'Eliminar suspensão indevida de contas adimplentes, monitorar erros de billing/gateway que travam contas, e simplificar o fluxo de assinatura e gestão de conta multi-usuário.',
+    impact: 'Gargalo nº1 citado. Cada conta suspensa indevidamente = churn de cliente pagante. Direto na receita e na confiança no produto.',
+    dependencies: [],
+    milestones: [
+      { text: 'Eliminar suspensão indevida de contas adimplentes (F-01)', q: 'Q3 2026', status: 'todo' },
+      { text: 'Monitoramento proativo de erros de billing/gateway (F-02)', q: 'Q3 2026', status: 'todo' },
+      { text: 'Simplificar fluxo de assinatura/contratação (F-03)', q: 'Q3 2026', status: 'todo' },
+      { text: 'Multi-usuário e gestão de conta na organização (F-04)', q: 'Q4 2026', status: 'todo' },
+    ]
+  },
+  {
+    id: 'ai-cost',
+    icon: '💰', title: 'Custo & Margem — AI Agent', subtitle: 'Otimização de tokens e infraestrutura',
+    status: 'planning', progress: 5, color: '#f97316',
+    quarter: 'Q3 2026', tl: { start: 2, span: 1 },
+    priority: '🔴 Crítico (P0)', effort: '1–2 meses',
+    description: 'Otimizar custo de infraestrutura e tokens do AI Agent. Revisar modelo, prompts e roteamento para garantir que custo não cresça mais rápido que a receita.',
+    impact: 'Risco direto de margem — insustentável se custo de IA escalar acima da receita. Crítico para crescer com saúde financeira (IA-01).',
+    dependencies: [],
+    milestones: [
+      { text: 'Auditoria de custo por conta e por interação', q: 'Q3 2026', status: 'todo' },
+      { text: 'Roteamento inteligente: modelo menor onde possível', q: 'Q3 2026', status: 'todo' },
+      { text: 'Otimização de prompts e compressão de contexto', q: 'Q3 2026', status: 'todo' },
+      { text: 'Dashboard interno de custo por conta', q: 'Q4 2026', status: 'todo' },
+    ]
+  },
+  // ── P0–P1 ALTA PRIORIDADE ─────────────────────────────────────────
+  {
+    id: 'ttv',
+    icon: '⚡', title: 'Time To Value', subtitle: 'Onboarding & Ativação',
+    status: 'active', progress: 30, color: '#10b981',
+    quarter: 'Q2–Q3 2026', tl: { start: 1, span: 2 },
+    priority: '🔴 Alta (P0–P1)', effort: '2–3 meses',
+    description: 'Reduzir tempo entre cadastro e primeiro evento de conversão offline. Meta: cliente trackando leads em < 24h. Inclui integração via GTM e automação de conversões offline ao conectar conta de anúncios.',
+    impact: 'Diretamente ligado à retenção e redução de churn nos primeiros 30 dias. Crítico para escalar para 1.000+ contas.',
+    dependencies: [],
+    milestones: [
+      { text: 'Mapeamento do funil de ativação atual', q: 'Q2 2026', status: 'doing' },
+      { text: 'Publicação do script Expad via GTM (ON-01)', q: 'Q2 2026', status: 'todo' },
+      { text: 'Conversões offline automáticas ao conectar conta de anúncios (ON-02)', q: 'Q2 2026', status: 'todo' },
+      { text: 'Redesign do onboarding (checklist + wizards)', q: 'Q3 2026', status: 'todo' },
+      { text: 'Detecção automática de setup incompleto', q: 'Q3 2026', status: 'todo' },
+      { text: 'TTV médio < 24h medido e monitorado', q: 'Q3 2026', status: 'todo' },
+    ]
+  },
+  {
+    id: 'ai-agent',
+    icon: '🧠', title: 'AI Agent — Melhorias', subtitle: 'Setup · Multi-agente · Bugs · Recursos',
+    status: 'planning', progress: 15, color: '#f59e0b',
+    quarter: 'Q3–Q4 2026', tl: { start: 2, span: 2 },
+    priority: '🔴 Alta (P1)', effort: '4–5 meses',
+    description: 'Resolver gargalos do AI Agent: simplificar setup, separar agentes por número de WhatsApp, suporte a múltiplos scripts, corrigir bugs de notificação, filtros por unidade, envio de áudio/PDF e relatórios de atendimento.',
+    impact: 'Setup complexo = gargalo nº3 de ativação. Bugs ativos geram desconfiança. Recursos de multi-agente habilitam contas maiores e agências.',
+    dependencies: ['APIs WhatsApp media upload, GCS storage'],
+    milestones: [
+      { text: 'Simplificar setup do AI Agent (IA-02)', q: 'Q3 2026', status: 'todo' },
+      { text: 'Separar agentes por número de WhatsApp (IA-03)', q: 'Q3 2026', status: 'todo' },
+      { text: 'Múltiplos scripts/plugins por conta (IA-04)', q: 'Q3 2026', status: 'todo' },
+      { text: 'Corrigir notificações indevidas para vendedores (IA-05)', q: 'Q3 2026', status: 'todo' },
+      { text: 'Filtro de visualização por unidade (IA-06)', q: 'Q3 2026', status: 'todo' },
+      { text: 'Envio de áudio via WhatsApp (AI voz)', q: 'Q4 2026', status: 'todo' },
+      { text: 'Envio de PDF/Documentos para leads', q: 'Q4 2026', status: 'todo' },
+      { text: 'Relatórios de atendimento por vendedor (IA-07)', q: 'Q4 2026', status: 'todo' },
+    ]
+  },
+  {
+    id: 'agency',
+    icon: '🏢', title: 'Canal de Agências', subtitle: 'Multi-conta · White-label · Pricing',
+    status: 'backlog', progress: 20, color: '#06b6d4',
+    quarter: 'Q3–Q4 2026', tl: { start: 2, span: 2 },
+    priority: '🔴 Alta (P1)', effort: '3–4 meses',
+    description: 'Estrutura de produto para agências: painel multi-conta, gestão de permissões, white-label parcial, modelo de comissão/revenda e ajuste de pricing para o perfil de agência.',
+    impact: 'Uma agência = 10–50 clientes. Essencial para meta R$300K MRR. Pricing atual não reflete modelo de uso de agências (F-05).',
+    dependencies: ['Time To Value (produto maduro primeiro)'],
+    milestones: [
+      { text: 'Painel multi-conta (visão agência)', q: 'Q2 2026', status: 'doing' },
+      { text: 'Ajustar pricing para perfil Agência (F-05)', q: 'Q3 2026', status: 'todo' },
+      { text: 'Permissões granulares por cliente', q: 'Q3 2026', status: 'todo' },
+      { text: 'White-label (logo + domínio customizado)', q: 'Q4 2026', status: 'todo' },
+      { text: 'Modelo de comissão / plano agência', q: 'Q4 2026', status: 'todo' },
+      { text: 'Primeiro batch de 10 agências ativas', q: 'Q4 2026', status: 'todo' },
+    ]
+  },
+  // ── P2 IMPORTANTE ─────────────────────────────────────────────────
+  {
+    id: 'ux-integrations',
+    icon: '🔌', title: 'UX do Chat & Integrações', subtitle: 'Reply · Imagem · CRMs · Responsividade',
+    status: 'backlog', progress: 0, color: '#8b5cf6',
+    quarter: 'Q4 2026', tl: { start: 3, span: 2 },
+    priority: '🟡 Importante (P2)', effort: '3–4 meses',
+    description: 'Melhorias de UX no chat (reply, colar imagem, responsividade em telas menores), qualificação do lead via site do cliente e integrações com CRMs e ERPs mais demandados pelos clientes.',
+    impact: 'Reduz fricção no atendimento diário. Integrações desbloqueiam adoção em contas com stack existente. Paridade com concorrentes (IA-08 a IA-11, INT-01).',
+    dependencies: ['AI Agent — Melhorias'],
+    milestones: [
+      { text: 'Reply/citação de mensagem específica no chat (IA-08)', q: 'Q4 2026', status: 'todo' },
+      { text: 'Colar imagem direto no chat via Ctrl+V (IA-09)', q: 'Q4 2026', status: 'todo' },
+      { text: 'Site do cliente como fonte de qualificação do agente (IA-10)', q: 'Q4 2026', status: 'todo' },
+      { text: 'Responsividade em telas menores (IA-11)', q: 'Q4 2026', status: 'todo' },
+      { text: 'Mapeamento e priorização de integrações (CRMs, ERPs) (INT-01)', q: 'Q4 2026', status: 'todo' },
+      { text: 'Integração nativa com top 3 CRMs mais demandados', q: 'Q1 2027', status: 'todo' },
+    ]
+  },
+  {
+    id: 'growth-retention',
+    icon: '📣', title: 'Crescimento & Retenção', subtitle: 'Indicações · Ativação de Contas · CS',
+    status: 'backlog', progress: 0, color: '#ec4899',
+    quarter: 'Q4 2026', tl: { start: 3, span: 2 },
+    priority: '🟡 Importante (P2)', effort: '2–3 meses',
+    description: 'Programa formal de indicações para clientes + estratégia de ativação contínua para contas que não exploram o pleno potencial da plataforma.',
+    impact: 'Indicação = menor CAC e maior confiança do novo cliente. Ativação proativa = mais prova de resultado = menor churn (REF-01, ATV-01).',
+    dependencies: ['Time To Value'],
+    milestones: [
+      { text: 'Mapear contas com uso parcial da plataforma (ATV-01)', q: 'Q3 2026', status: 'todo' },
+      { text: 'Comunicação proativa de benefícios não utilizados', q: 'Q4 2026', status: 'todo' },
+      { text: 'Estruturar programa formal de indicações (REF-01)', q: 'Q4 2026', status: 'todo' },
+      { text: 'Mecânica de incentivo + facilidade de indicação', q: 'Q4 2026', status: 'todo' },
+      { text: 'Métricas: taxa de indicação, NPS, ativação por conta', q: 'Q1 2027', status: 'todo' },
+    ]
+  },
+  // ── P3 ESTRATÉGICO ────────────────────────────────────────────────
   {
     id: 'app-mobile',
     icon: '📱', title: 'App Mobile Expad', subtitle: 'iPhone & Android',
     status: 'planning', progress: 5, color: '#4f6ef7',
-    quarter: 'Q3 2026', tl: { start: 2, span: 3 },
-    priority: '🔴 Alta', effort: '5–6 meses', team: 'Eng + Design',
-    description: 'App nativo (iOS + Android) em Flutter para clientes acompanharem leads, conversões e performance de campanhas de qualquer lugar.',
-    impact: 'Aumenta retenção e reduz churn. Diferencial frente a concorrentes sem app.',
+    quarter: 'Q4 2026–Q1 2027', tl: { start: 3, span: 3 },
+    priority: '🔵 Estratégico (P3)', effort: '5–6 meses',
+    description: 'App nativo (iOS + Android) em Flutter para clientes acompanharem leads, conversões e performance de campanhas. Parte da percepção de "plataforma robusta" frente a concorrentes (PLT-01).',
+    impact: 'Aumenta retenção. Diferencial frente a concorrentes sem app. Recurso aguardado pelo mercado.',
     dependencies: ['Time To Value (UX flows definidos antes do app)'],
     milestones: [
-      { text: 'Definição de escopo & wireframes', q: 'Q2–Q3 2026', status: 'todo' },
-      { text: 'App Flutter iOS (alpha interno)', q: 'Q3 2026', status: 'todo' },
-      { text: 'App Flutter Android (alpha interno)', q: 'Q3 2026', status: 'todo' },
-      { text: 'Beta fechado com 20 clientes', q: 'Q4 2026', status: 'todo' },
-      { text: 'Publicação App Store + Play Store', q: 'Q1 2027', status: 'todo' },
+      { text: 'Definição de escopo & wireframes', q: 'Q4 2026', status: 'todo' },
+      { text: 'App Flutter iOS (alpha interno)', q: 'Q1 2027', status: 'todo' },
+      { text: 'App Flutter Android (alpha interno)', q: 'Q1 2027', status: 'todo' },
+      { text: 'Beta fechado com 20 clientes', q: 'Q1 2027', status: 'todo' },
+      { text: 'Publicação App Store + Play Store', q: 'Q2 2027', status: 'todo' },
     ]
   },
   {
@@ -281,7 +408,7 @@ const DEFAULT_PROJECTS = [
     icon: '🤖', title: 'MCP & CLI Agent Expad', subtitle: 'Developer & Power User Layer',
     status: 'backlog', progress: 10, color: '#7c3aed',
     quarter: 'Q4 2026', tl: { start: 3, span: 3 },
-    priority: '🟡 Média', effort: '3–4 meses', team: 'Eng (Go)',
+    priority: '🔵 Estratégico (P3)', effort: '3–4 meses',
     description: 'Servidor MCP oficial + CLI Agent para agências e power users operarem a plataforma via AI (Claude, Cursor, etc.). Expõe leads, eventos offline e métricas como tools MCP.',
     impact: 'Diferencial único no mercado. Uma agência usa AI para operar 50 contas. Canal de distribuição via ecosystem Claude/Anthropic.',
     dependencies: ['APIs REST/gRPC estáveis'],
@@ -294,56 +421,22 @@ const DEFAULT_PROJECTS = [
     ]
   },
   {
-    id: 'ttv',
-    icon: '⚡', title: 'Time To Value', subtitle: 'Onboarding & Ativação',
-    status: 'active', progress: 30, color: '#10b981',
-    quarter: 'Q2–Q3 2026', tl: { start: 1, span: 2 },
-    priority: '🔴 Alta', effort: '2–3 meses', team: 'Produto + Eng + CS',
-    description: 'Reduzir tempo entre cadastro e primeiro evento de conversão offline. Meta: cliente trackando leads em < 24h. Onboarding guiado, checklist de setup, detecção de problemas, suporte proativo.',
-    impact: 'Diretamente ligado à retenção e redução de churn nos primeiros 30 dias. Crítico para escalar para 1.000+ contas.',
-    dependencies: [],
+    id: 'chat-advanced',
+    icon: '💬', title: 'Chat Avançado', subtitle: 'Paridade com WhatsApp · UX enterprise',
+    status: 'backlog', progress: 0, color: '#14b8a6',
+    quarter: 'Q1 2027', tl: { start: 4, span: 2 },
+    priority: '🔵 Estratégico (P3)', effort: '4–5 meses',
+    description: 'Evoluir o chat interno da Expad para paridade de recursos com WhatsApp: reações, encaminhamento, histórico pesquisável, notificações desktop nativas. Necessário para a Expad "parecer" plataforma enterprise (PLT-02).',
+    impact: 'Aumenta percepção de qualidade. Reduz objeção de "plataforma imatura". Diferencial de experiência para o vendedor.',
+    dependencies: ['AI Agent — Melhorias', 'UX do Chat & Integrações'],
     milestones: [
-      { text: 'Mapeamento do funil de ativação atual', q: 'Q2 2026', status: 'doing' },
-      { text: 'Redesign do onboarding (checklist + wizards)', q: 'Q2 2026', status: 'todo' },
-      { text: 'Detecção automática de setup incompleto', q: 'Q3 2026', status: 'todo' },
-      { text: 'Email/WhatsApp triggers de ativação proativa', q: 'Q3 2026', status: 'todo' },
-      { text: 'TTV médio < 24h medido e monitorado', q: 'Q3 2026', status: 'todo' },
+      { text: 'Auditoria de gap vs WhatsApp (recursos faltantes)', q: 'Q1 2027', status: 'todo' },
+      { text: 'Reações a mensagens', q: 'Q1 2027', status: 'todo' },
+      { text: 'Encaminhamento e menções de mensagens', q: 'Q1 2027', status: 'todo' },
+      { text: 'Histórico pesquisável', q: 'Q2 2027', status: 'todo' },
+      { text: 'Notificações desktop nativas', q: 'Q2 2027', status: 'todo' },
     ]
   },
-  {
-    id: 'ai-agent',
-    icon: '🧠', title: 'AI Agent — Novos Recursos', subtitle: 'Áudio · PDF · Alertas',
-    status: 'planning', progress: 15, color: '#f59e0b',
-    quarter: 'Q3–Q4 2026', tl: { start: 2, span: 3 },
-    priority: '🔴 Alta', effort: '4–5 meses', team: 'Eng (AI + WhatsApp)',
-    description: 'Expandir o AI Agent com 3 recursos: (1) Envio de áudios para leads via WhatsApp, (2) Envio de PDFs/documentos, (3) Sistema de alertas e notificações de atividades para o time.',
-    impact: 'Aumenta taxa de conversão do atendimento automatizado. Agentes mais humanos = leads mais engajados.',
-    dependencies: ['APIs WhatsApp media upload, GCS storage'],
-    milestones: [
-      { text: 'Envio de Áudio via WhatsApp (AI voz)', q: 'Q3 2026', status: 'todo' },
-      { text: 'Envio de PDF/Documentos para leads', q: 'Q3 2026', status: 'todo' },
-      { text: 'Sistema de Alertas — painel do cliente', q: 'Q3 2026', status: 'todo' },
-      { text: 'Notificações push (email + WhatsApp interno)', q: 'Q4 2026', status: 'todo' },
-      { text: 'Dashboard de atividades do AI Agent', q: 'Q4 2026', status: 'todo' },
-    ]
-  },
-  {
-    id: 'agency',
-    icon: '🏢', title: 'Canal de Agências', subtitle: 'Multi-conta · White-label · Comissões',
-    status: 'backlog', progress: 20, color: '#06b6d4',
-    quarter: 'Q3 2026', tl: { start: 2, span: 2 },
-    priority: '🔴 Alta', effort: '3–4 meses', team: 'Produto + Eng + Vendas',
-    description: 'Estrutura de produto para agências: painel multi-conta, gestão de permissões, white-label parcial, modelo de comissão/revenda.',
-    impact: 'Uma agência = 10–50 clientes. Essencial para meta R$300K MRR.',
-    dependencies: ['Time To Value (produto maduro primeiro)'],
-    milestones: [
-      { text: 'Painel multi-conta (visão agência)', q: 'Q2 2026', status: 'doing' },
-      { text: 'Permissões granulares por cliente', q: 'Q3 2026', status: 'todo' },
-      { text: 'White-label (logo + domínio customizado)', q: 'Q3 2026', status: 'todo' },
-      { text: 'Modelo de comissão / plano agência', q: 'Q4 2026', status: 'todo' },
-      { text: 'Primeiro batch de 10 agências ativas', q: 'Q4 2026', status: 'todo' },
-    ]
-  }
 ];
 
 // ── STORAGE ───────────────────────────────────────────────────────
