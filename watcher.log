@@ -267,3 +267,5 @@ error: additionally, your index contains uncommitted changes.
 error: Please commit or stash them.
 fatal: unable to access 'https://github.com/AleExpad/expad-roadmap.git/': Could not resolve host: github.com
 ✅ Publicado! roadmap.expad.co (público) e roadmap.expad.co/interno (dashboard)
+🚀 Publicando roadmap Expad...
+ℹ️  Sem projects.json novo — usando o anterior (ou clique 'Exportar público' no dashboard)
