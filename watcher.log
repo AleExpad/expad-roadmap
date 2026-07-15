@@ -269,3 +269,13 @@ fatal: unable to access 'https://github.com/AleExpad/expad-roadmap.git/': Could 
 ✅ Publicado! roadmap.expad.co (público) e roadmap.expad.co/interno (dashboard)
 🚀 Publicando roadmap Expad...
 ℹ️  Sem projects.json novo — usando o anterior (ou clique 'Exportar público' no dashboard)
+[gh-pages 53192e5] update: roadmap 14/07/2026 09:05
+ 1 file changed, 2 insertions(+)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+failed to store: -61
+To https://github.com/AleExpad/expad-roadmap.git
+   d7fe48a..53192e5  gh-pages -> gh-pages
+✅ Publicado! roadmap.expad.co (público) e roadmap.expad.co/interno (dashboard)
+🚀 Publicando roadmap Expad...
+ℹ️  Sem projects.json novo — usando o anterior (ou clique 'Exportar público' no dashboard)
