@@ -409,3 +409,14 @@ To https://github.com/AleExpad/expad-roadmap.git
 ✅ Publicado! roadmap.expad.co (público) e roadmap.expad.co/interno (dashboard)
 🚀 Publicando roadmap Expad...
 ℹ️  Sem projects.json novo — usando o anterior (ou clique 'Exportar público' no dashboard)
+[gh-pages 9758c36] update: roadmap 31/07/2026 09:04
+ 1 file changed, 10 insertions(+)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+failed to store: -61
+To https://github.com/AleExpad/expad-roadmap.git
+ ! [remote rejected] gh-pages -> gh-pages (cannot lock ref 'refs/heads/gh-pages': is at 9758c364b7891f1d8b91f1c259a2318fdd724d74 but expected 8a5ffa64129729ab756fb43cd8222642ba075cab)
+error: failed to push some refs to 'https://github.com/AleExpad/expad-roadmap.git'
+✅ Publicado! roadmap.expad.co (público) e roadmap.expad.co/interno (dashboard)
+🚀 Publicando roadmap Expad...
+ℹ️  Sem projects.json novo — usando o anterior (ou clique 'Exportar público' no dashboard)
